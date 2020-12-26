@@ -3,6 +3,7 @@ package com.kieling.itsector.utils
 import android.content.Context
 import android.net.ConnectivityManager
 
+@Suppress("DEPRECATION")
 object ConnectivityUtil {
     fun isConnected(context: Context): Boolean {
         val connectivityManager =

@@ -13,8 +13,8 @@ interface FavoriteBookDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertFavoriteBook(favoriteBook: FavoriteBookDb)
 
-    @Query("SELECT books_table.* FROM books_table JOIN favorite_book_table ON books_table.id = favorite_book_table.id LIMIT :pageNumber,:pageSize")
-    fun getFavoriteBooks(pageNumber: Int, pageSize: Int): LiveData<List<BookDb>?>
+    @Query("SELECT books_table.* FROM books_table JOIN favorite_book_table ON books_table.id = favorite_book_table.id LIMIT :pageSize")
+    fun getFavoriteBooks(pageSize: Int): LiveData<List<BookDb>?>
 
     @Query("SELECT * FROM favorite_book_table WHERE id=:bookId")
     fun getFavoriteBookById(bookId: String): LiveData<FavoriteBookDb>

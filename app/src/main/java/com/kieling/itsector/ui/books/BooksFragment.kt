@@ -144,16 +144,11 @@ class BooksFragment : DaggerFragment() {
 
     private fun populateList(resource: Resource<List<BookDb>?>) {
         when {
-            resource.status.isLoading() -> {
-                Log.d(logTag, "Loading books...")
-                book_list.showProgressView()
-            }
+            resource.status.isLoading() -> book_list.showProgressView()
             resource.status.isSuccessful() -> {
                 Log.d(logTag, "Success: ${resource.data?.size} books loaded")
                 resource.load(book_list) { books ->
-                    if (!favoritesShowing) {
-                        bookList.clear()
-                    }
+                    bookList.clear()
                     bookList.addAll(books!!)
                     booksAdapter.notifyDataSetChanged()
                 }

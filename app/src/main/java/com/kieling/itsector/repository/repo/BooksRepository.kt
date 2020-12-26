@@ -69,10 +69,7 @@ class BooksRepository @Inject constructor(
     fun getFavoriteBooks(pageNumber: Int): LiveData<Resource<List<BookDb>?>> =
         object : DbBoundResource<List<BookDb>?>() {
             override fun loadFromDb(): LiveData<List<BookDb>?> =
-                favoriteBookDao.getFavoriteBooks(
-                    pageNumber * Constants.PAGE_SIZE,
-                    Constants.PAGE_SIZE
-                )
+                favoriteBookDao.getFavoriteBooks((pageNumber + 1) * Constants.PAGE_SIZE)
         }.asLiveData()
 
     fun getFavoriteBookById(bookId: String): LiveData<Resource<FavoriteBookDb>> =
