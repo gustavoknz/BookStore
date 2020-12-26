@@ -38,9 +38,11 @@ class BooksRepository @Inject constructor(
 
             override fun shouldFetch(data: List<BookDb>?) = ConnectivityUtil.isConnected(context)
 
+            //Since the API allows sorting books using only fields not available in the result
+            // data (relevance or newest), it does make any sense to sort items from the DB
             override fun loadFromDb() = booksDao.getBooks()
 
-            override fun createCall() = apiServices.getRootBook(0)
+            override fun createCall() = apiServices.getRootBook()
         }.asLiveData()
 
     private fun transformRepositoryToDb(items: List<BookItem>): List<BookDb> {
@@ -61,9 +63,8 @@ class BooksRepository @Inject constructor(
 
     fun getBooksFromServerOnly(): LiveData<Resource<RootBook>> =
         object : NetworkResource<RootBook>() {
-            override fun createCall(): LiveData<Resource<RootBook>> {
-                return apiServices.getRootBook(0)
-            }
+            override fun createCall(pageNumber: Int): LiveData<Resource<RootBook>> =
+                apiServices.getRootBook()
         }.asLiveData()
 
     fun getBooksFromDbOnly(): LiveData<Resource<List<BookDb>>> =

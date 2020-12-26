@@ -14,7 +14,7 @@ abstract class NetworkResource<RequestType> @MainThread constructor() {
     }
 
     private fun fetchFromNetwork() {
-        val apiResponse = createCall()
+        val apiResponse = createCall(0)
         result.addSource(apiResponse) { response ->
             result.removeSource(apiResponse)
             response?.apply {
@@ -36,5 +36,5 @@ abstract class NetworkResource<RequestType> @MainThread constructor() {
     }
 
     @MainThread
-    protected abstract fun createCall(): LiveData<Resource<RequestType>>
+    protected abstract fun createCall(pageNumber: Int): LiveData<Resource<RequestType>>
 }
