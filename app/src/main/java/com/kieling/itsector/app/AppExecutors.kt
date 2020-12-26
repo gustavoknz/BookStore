@@ -13,7 +13,6 @@ open class AppExecutors(
     private val networkIO: Executor,
     private val mainThread: Executor
 ) {
-
     @Inject
     constructor() : this(
         Executors.newSingleThreadExecutor(),

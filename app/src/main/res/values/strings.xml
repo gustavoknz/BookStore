@@ -2,9 +2,6 @@
     <string name="app_name">ITSector Book Store</string>
     <string name="activity_label_books">Book Store</string>
 
-    <string name="books_fragment_label">Books Fragment</string>
-    <string name="detail_fragment_label">Detail Fragment</string>
-
     <string name="toolbar_icon_favorite_desc">See your favorite items</string>
     <string name="list_no_books">No books</string>
     <string name="item_thumbnail_desc">Book\'s thumbnail</string>

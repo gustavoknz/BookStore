@@ -3,7 +3,6 @@ package com.kieling.itsector.ui.books
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModel
 import com.kieling.itsector.repository.api.network.Resource
 import com.kieling.itsector.repository.model.db.BookDb
@@ -13,30 +12,24 @@ import javax.inject.Inject
 
 class BooksViewModel @Inject
 constructor(private val booksRepository: BooksRepository) : ViewModel() {
+    private var currentPage = 0
     private val logTag = "BooksRepository"
-    private val favoriteBooksObserver: Observer<Resource<List<BookDb>>>? = null
-    private var favoriteBooksLiveData: LiveData<Resource<List<BookDb>>> = MutableLiveData()
     val isFavorite = MutableLiveData<Boolean>()
+
+    fun incrementCurrentPage() = ++currentPage
 
     fun getBookById(bookId: String): LiveData<Resource<BookDb>> =
         booksRepository.getBookById(bookId)
 
-    fun getBooks(): LiveData<Resource<List<BookDb>?>> = booksRepository.getBooks()
-
-    fun getBooksFromServer() = booksRepository.getBooksFromServerOnly()
-
-    fun getBooksFromDb() = booksRepository.getBooksFromDbOnly()
+    fun getBooks(): LiveData<Resource<List<BookDb>?>> {
+        Log.d(logTag, "Searching for books in page $currentPage")
+        return booksRepository.getBooks(currentPage)
+    }
 
     fun initFavorite(bookId: String) = booksRepository.getFavoriteBookById(bookId)
 
-    fun getFavoriteBooks(): LiveData<Resource<List<BookDb>?>> = booksRepository.getFavoriteBooks()
-
-    override fun onCleared() {
-        if (favoriteBooksObserver != null) {
-            favoriteBooksLiveData.removeObserver(favoriteBooksObserver)
-        }
-        super.onCleared()
-    }
+    fun getFavoriteBooks(): LiveData<Resource<List<BookDb>?>> =
+        booksRepository.getFavoriteBooks(currentPage)
 
     fun favoriteBookClicked(bookId: String) {
         if (isFavorite.value == true) {
@@ -58,5 +51,9 @@ constructor(private val booksRepository: BooksRepository) : ViewModel() {
     private fun removeFavorite(bookId: String) {
         booksRepository.removeFavoriteBook(bookId)
         isFavorite.postValue(false)
+    }
+
+    fun resetCurrentPage() {
+        currentPage = 0
     }
 }

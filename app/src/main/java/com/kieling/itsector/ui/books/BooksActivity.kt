@@ -7,6 +7,7 @@ import com.kieling.itsector.R
 import com.kieling.itsector.ui.DaggerActivity
 import kotlinx.android.synthetic.main.toolbar_main.*
 
+//TODO Add a back button when other fragment than the main one is visible
 class BooksActivity : DaggerActivity() {
     private val logTag = "BooksActivity"
 

@@ -6,7 +6,6 @@ import com.kieling.itsector.app.AppExecutors
 import com.kieling.itsector.repository.api.ApiServices
 import com.kieling.itsector.repository.api.network.DbBoundResource
 import com.kieling.itsector.repository.api.network.NetworkAndDbBoundResource
-import com.kieling.itsector.repository.api.network.NetworkResource
 import com.kieling.itsector.repository.api.network.Resource
 import com.kieling.itsector.repository.db.BooksDao
 import com.kieling.itsector.repository.db.FavoriteBookDao
@@ -15,6 +14,7 @@ import com.kieling.itsector.repository.model.db.FavoriteBookDb
 import com.kieling.itsector.repository.model.repository.BookItem
 import com.kieling.itsector.repository.model.repository.RootBook
 import com.kieling.itsector.utils.ConnectivityUtil
+import com.kieling.itsector.utils.Constants
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -28,7 +28,7 @@ class BooksRepository @Inject constructor(
     /**
      * Fetch the books from DB if it exist. Otherwise fetch from server and persist in the DB
      */
-    fun getBooks(): LiveData<Resource<List<BookDb>?>> =
+    fun getBooks(pageNumber: Int): LiveData<Resource<List<BookDb>?>> =
         object : NetworkAndDbBoundResource<List<BookDb>, RootBook>(appExecutors) {
             override fun saveCallResult(rootBook: RootBook) {
                 if (rootBook.items.isNotEmpty()) {
@@ -42,7 +42,7 @@ class BooksRepository @Inject constructor(
             // data (relevance or newest), it does make any sense to sort items from the DB
             override fun loadFromDb() = booksDao.getBooks()
 
-            override fun createCall() = apiServices.getRootBook()
+            override fun createCall() = apiServices.getRootBook(pageNumber * Constants.PAGE_SIZE)
         }.asLiveData()
 
     private fun transformRepositoryToDb(items: List<BookItem>): List<BookDb> {
@@ -61,25 +61,18 @@ class BooksRepository @Inject constructor(
         return result
     }
 
-    fun getBooksFromServerOnly(): LiveData<Resource<RootBook>> =
-        object : NetworkResource<RootBook>() {
-            override fun createCall(pageNumber: Int): LiveData<Resource<RootBook>> =
-                apiServices.getRootBook()
-        }.asLiveData()
-
-    fun getBooksFromDbOnly(): LiveData<Resource<List<BookDb>>> =
-        object : DbBoundResource<List<BookDb>>() {
-            override fun loadFromDb(): LiveData<List<BookDb>> = booksDao.getBooks()
-        }.asLiveData()
-
     fun getBookById(bookId: String): LiveData<Resource<BookDb>> =
         object : DbBoundResource<BookDb>() {
             override fun loadFromDb(): LiveData<BookDb> = booksDao.getBookById(bookId)
         }.asLiveData()
 
-    fun getFavoriteBooks(): LiveData<Resource<List<BookDb>?>> =
+    fun getFavoriteBooks(pageNumber: Int): LiveData<Resource<List<BookDb>?>> =
         object : DbBoundResource<List<BookDb>?>() {
-            override fun loadFromDb(): LiveData<List<BookDb>?> = favoriteBookDao.getFavoriteBooks()
+            override fun loadFromDb(): LiveData<List<BookDb>?> =
+                favoriteBookDao.getFavoriteBooks(
+                    pageNumber * Constants.PAGE_SIZE,
+                    Constants.PAGE_SIZE
+                )
         }.asLiveData()
 
     fun getFavoriteBookById(bookId: String): LiveData<Resource<FavoriteBookDb>> =

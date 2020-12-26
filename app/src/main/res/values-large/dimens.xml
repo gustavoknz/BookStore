@@ -14,7 +14,6 @@
 
     <!-- List items -->
     <dimen name="card_elevation">8dp</dimen>
-    <dimen name="card_margin">10dp</dimen>
     <dimen name="card_corner_radius">5dp</dimen>
     <dimen name="item_title_margin">16dp</dimen>
     <dimen name="item_title_size">36sp</dimen>

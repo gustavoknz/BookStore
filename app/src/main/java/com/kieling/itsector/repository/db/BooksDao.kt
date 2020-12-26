@@ -6,7 +6,6 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.kieling.itsector.repository.model.db.BookDb
-import java.util.*
 
 @Dao
 interface BooksDao {

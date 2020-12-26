@@ -12,6 +12,7 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.kieling.itsector.R
 import com.kieling.itsector.repository.api.network.Resource
 import com.kieling.itsector.repository.model.db.BookDb
@@ -67,14 +68,37 @@ class BooksFragment : DaggerFragment() {
                 .addToBackStack(DetailFragment::class.java.name)
                 .commit()
         }
+        rootView.book_list.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+                super.onScrollStateChanged(recyclerView, newState)
+                if (!recyclerView.canScrollVertically(1) && newState == RecyclerView.SCROLL_STATE_IDLE) {
+                    Log.d(logTag, "The list reached the end for now")
+                    loadMoreBooks()
+                }
+            }
+        })
         toolbarFavoritesView = requireActivity().findViewById(R.id.toolbar_main_only_favorites)
         toolbarFavoritesView.setOnClickListener {
+            Log.d(logTag, "Favorites clicked. Before: $favoritesShowing")
+            bookList.clear()
+            booksAdapter.notifyDataSetChanged()
+            booksViewModel.resetCurrentPage()
             if (favoritesShowing) {
                 changeToAllBook()
             } else {
                 changeToOnlyFavorites()
             }
             favoritesShowing = !favoritesShowing
+            Log.d(logTag, "Favorites clicked. After: $favoritesShowing")
+        }
+    }
+
+    private fun loadMoreBooks() {
+        booksViewModel.incrementCurrentPage()
+        if (favoritesShowing) {
+            observeFavoriteBooks()
+        } else {
+            observeAllBooks()
         }
     }
 
@@ -112,7 +136,7 @@ class BooksFragment : DaggerFragment() {
     }
 
     private fun observeFavoriteBooks() {
-        Log.d(logTag, "Only favorites now!")
+        Log.d(logTag, "Observing favorite books...")
         booksViewModel.getFavoriteBooks().observe(viewLifecycleOwner, {
             populateList(it)
         })
@@ -127,7 +151,9 @@ class BooksFragment : DaggerFragment() {
             resource.status.isSuccessful() -> {
                 Log.d(logTag, "Success: ${resource.data?.size} books loaded")
                 resource.load(book_list) { books ->
-                    bookList.clear()
+                    if (!favoritesShowing) {
+                        bookList.clear()
+                    }
                     bookList.addAll(books!!)
                     booksAdapter.notifyDataSetChanged()
                 }

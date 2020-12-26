@@ -12,13 +12,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
-import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.request.RequestOptions
 import com.kieling.itsector.R
 import com.kieling.itsector.repository.model.db.BookDb
 import com.kieling.itsector.ui.bindImageFromUrl
@@ -120,7 +118,16 @@ class DetailFragment : Fragment() {
         detail_title.text = book.title
         detail_subtitle.text = book.subtitle
         detail_authors.text = getAuthorsToShow(book.authors)
-        bindImageFromUrl(detail_image, book.thumbnail)
+        if (book.thumbnail == null) {
+            detail_image.setImageDrawable(
+                AppCompatResources.getDrawable(
+                    requireContext(),
+                    R.drawable.ic_baseline_image
+                )
+            )
+        } else {
+            bindImageFromUrl(detail_image, book.thumbnail)
+        }
         detail_description.text = book.description
         if (book.buyLink == null) {
             detail_link.visibility = View.GONE
