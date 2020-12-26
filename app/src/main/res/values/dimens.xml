@@ -1,0 +1,41 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_margin">16dp</dimen>
+
+    <!-- Toolbar -->
+    <dimen name="toolbar_text_size">18sp</dimen>
+    <dimen name="toolbar_margin">16dp</dimen>
+    <dimen name="toolbar_favorite_size">20dp</dimen>
+
+    <!-- List -->
+    <dimen name="book_list_margin">8dp</dimen>
+    <dimen name="book_list_empty_image_size">100dp</dimen>
+    <dimen name="book_list_empty_title_size">18sp</dimen>
+
+    <!-- List items -->
+    <dimen name="card_elevation">6dp</dimen>
+    <dimen name="card_margin">8dp</dimen>
+    <dimen name="card_corner_radius">4dp</dimen>
+    <dimen name="item_title_margin">8dp</dimen>
+    <dimen name="item_title_size">18sp</dimen>
+    <dimen name="item_thumbnail_size">150dp</dimen>
+    <dimen name="item_thumbnail_margin">16dp</dimen>
+
+    <!-- Details -->
+    <dimen name="detail_layout_padding">16dp</dimen>
+    <dimen name="detail_favorite_image_size">40dp</dimen>
+    <dimen name="detail_title_padding">25dp</dimen>
+    <dimen name="detail_title_size">32sp</dimen>
+    <dimen name="detail_subtitle_margin">16dp</dimen>
+    <dimen name="detail_subtitle_padding">15dp</dimen>
+    <dimen name="detail_subtitle_size">22sp</dimen>
+    <dimen name="detail_authors_margin">16dp</dimen>
+    <dimen name="detail_authors_padding">15dp</dimen>
+    <dimen name="detail_authors_size">18sp</dimen>
+    <dimen name="detail_image_size">200dp</dimen>
+    <dimen name="detail_image_margin">16dp</dimen>
+    <dimen name="detail_description_margin">16dp</dimen>
+    <dimen name="detail_description_size">14sp</dimen>
+    <dimen name="detail_link_margin">16dp</dimen>
+    <dimen name="detail_link_size">14sp</dimen>
+</resources>

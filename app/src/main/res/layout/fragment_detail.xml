@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="@dimen/detail_layout_padding"
+        tools:context=".ui.detail.DetailFragment">
+
+        <ImageView
+            android:id="@+id/detail_favorite"
+            android:layout_width="@dimen/detail_favorite_image_size"
+            android:layout_height="@dimen/detail_favorite_image_size"
+            android:contentDescription="@string/detail_favorite_desc_no"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ic_heart_full" />
+
+        <TextView
+            android:id="@+id/detail_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:paddingStart="@dimen/detail_title_padding"
+            android:paddingEnd="@dimen/detail_title_padding"
+            android:textColor="@color/detail_title"
+            android:textSize="@dimen/detail_title_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="This is a very long title, so I can test the layout" />
+
+        <TextView
+            android:id="@+id/detail_subtitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/detail_subtitle_margin"
+            android:paddingStart="@dimen/detail_subtitle_padding"
+            android:paddingEnd="@dimen/detail_subtitle_padding"
+            android:textSize="@dimen/detail_subtitle_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/detail_title"
+            tools:text="Book subtitles most of times are longer than a title, but not too much. Usually only one line" />
+
+        <TextView
+            android:id="@+id/detail_authors"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/detail_authors_margin"
+            android:paddingStart="@dimen/detail_authors_padding"
+            android:paddingEnd="@dimen/detail_authors_padding"
+            android:textColor="@color/teal_700"
+            android:textSize="@dimen/detail_authors_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/detail_subtitle"
+            tools:text="John Smith, John Smith, John Smith and John Smith" />
+
+        <ImageView
+            android:id="@+id/detail_image"
+            android:layout_width="@dimen/detail_image_size"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/detail_image_margin"
+            android:contentDescription="@string/detail_image_desc"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/detail_authors"
+            tools:src="@drawable/ic_baseline_image" />
+
+        <TextView
+            android:id="@+id/detail_description"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/detail_description_margin"
+            android:textSize="@dimen/detail_description_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/detail_image"
+            tools:text="Book description most of times are very long, so they can describe it with more detail to retain reader attention. Usually written in several lines. Book description most of times are very long, so they can describe it with more detail to retain reader attention. Usually written in several lines. Book description most of times are very long, so they can describe it with more detail to retain reader attention. Usually written in several lines. Book description most of times are very long, so they can describe it with more detail to retain reader attention. Usually written in several lines." />
+
+        <TextView
+            android:id="@+id/detail_link"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/detail_link_margin"
+            android:text="@string/detail_buy_link"
+            android:textSize="@dimen/detail_link_size"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/detail_description" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.core.widget.NestedScrollView>

@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">ITSector Book Store</string>
+    <string name="activity_label_books">Book Store</string>
+
+    <string name="books_fragment_label">Books Fragment</string>
+    <string name="detail_fragment_label">Detail Fragment</string>
+
+    <string name="toolbar_icon_favorite_desc">See your favorite items</string>
+    <string name="list_no_books">No books</string>
+    <string name="item_thumbnail_desc">Book\'s thumbnail</string>
+    <string name="detail_favorite_desc_yes">This item is one of your favorites</string>
+    <string name="detail_favorite_desc_no">This item is not one of your favorites</string>
+    <string name="detail_image_desc">Book image</string>
+    <string name="detail_buy_link">&lt;a href=%1$s>Buy link&lt;/a></string>
+</resources>
