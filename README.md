@@ -1,2 +1,2 @@
 # BookStore
-Android project using Jetpack Components(MVVM, Room, Paging), Kotlin, Retrofit, Dagger and others
+Android project using Jetpack Components(MVVM, Room), Kotlin, Retrofit, Dagger and others
