@@ -31,10 +31,10 @@ class DetailFragment : Fragment() {
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private lateinit var rootView: View
-    private val logTag = "DetailFragment"
-    private val booksViewModel: BooksViewModel by viewModels { viewModelFactory }
     private var paramBookId: String? = null
     private var toolbarFavoritesView: ImageView? = null
+    private val logTag = "DetailFragment"
+    private val booksViewModel: BooksViewModel by viewModels { viewModelFactory }
 
     override fun onAttach(context: Context) {
         AndroidSupportInjection.inject(this)
@@ -96,7 +96,7 @@ class DetailFragment : Fragment() {
         booksViewModel.initFavorite(paramBookId!!).observe(viewLifecycleOwner, {
             when {
                 it.status.isLoading() -> {
-                    Log.d(logTag, "Loading favorite book id=$paramBookId")
+                    Log.d(logTag, "Loading favorite book id=$paramBookId...")
                 }
                 it.status.isSuccessful() -> {
                     val bookIsFavorite = it.data != null

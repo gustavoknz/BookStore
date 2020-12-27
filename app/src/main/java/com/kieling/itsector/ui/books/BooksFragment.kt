@@ -57,9 +57,9 @@ class BooksFragment : DaggerFragment() {
     }
 
     private fun load() {
-        rootView.book_list.layoutManager = GridLayoutManager(context, 2)
         booksAdapter = BooksAdapter(bookList)
         rootView.book_list.adapter = booksAdapter
+        rootView.book_list.layoutManager = GridLayoutManager(context, 2)
 
         booksAdapter.onBookClicked = { book ->
             requireActivity().supportFragmentManager
@@ -80,8 +80,6 @@ class BooksFragment : DaggerFragment() {
         toolbarFavoritesView = requireActivity().findViewById(R.id.toolbar_main_only_favorites)
         toolbarFavoritesView.setOnClickListener {
             Log.d(logTag, "Favorites clicked. Before: $favoritesShowing")
-            bookList.clear()
-            booksAdapter.notifyDataSetChanged()
             booksViewModel.resetCurrentPage()
             if (favoritesShowing) {
                 changeToAllBook()

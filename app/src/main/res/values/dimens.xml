@@ -4,6 +4,7 @@
 
     <!-- Toolbar -->
     <dimen name="toolbar_text_size">18sp</dimen>
+    <dimen name="toolbar_margin">16dp</dimen>
     <dimen name="toolbar_favorite_size">20dp</dimen>
 
     <!-- List -->
